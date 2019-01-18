@@ -182,7 +182,7 @@ public class ChartJFrame extends JFrame {
 	 * A variable that keeps tracks of number of clicks on the plot
 	 */
 	private int numberOfClicks = 0;
-	private JComboBox elementAxis;
+	private JComboBox<String> elementAxis;
 	/**
 	 * Data file read
 	 */
@@ -539,7 +539,7 @@ public class ChartJFrame extends JFrame {
 				plottedElements.add(elementNames.get(i));
 			}
 		}
-		elementAxis = new JComboBox(plottedElements);
+		elementAxis = new JComboBox<>(plottedElements);
 		elementAxis.setFont(new java.awt.Font("Arial", 1, 11));
 
 		DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();

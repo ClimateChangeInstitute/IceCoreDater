@@ -39,8 +39,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -101,18 +101,18 @@ public class MainMenu extends JFrame {
 	 * 
 	 * @see plottingMethods
 	 */
-	private JComboBox plottingMethodsJComboBox;
+	private JComboBox<String> plottingMethodsJComboBox;
 
 	/**
 	 * Any element that can be selected for plotting.
 	 */
-	private List<Checkbox> selectedElements;
+	private Vector<Checkbox> selectedElements;
 
 	/**
 	 * Contains all of the possible elements that can be plotted.
 	 */
-	private JList elementsToPlotJList;
 
+	private JList<Checkbox> elementsToPlotJList;
 	public MainMenu(File tempFile) {
 		super("Main Menu");
 		if (tempFile != null) {
@@ -186,13 +186,13 @@ public class MainMenu extends JFrame {
 			JPanel checkBoxesPanel = new JPanel(new FlowLayout());
 			checkBoxesPanel.setOpaque(true);
 
-			selectedElements = new ArrayList<Checkbox>();
+			selectedElements = new Vector<Checkbox>();
 
 			for (int j = 0; j < headerElements.length; j++) {
 				selectedElements.add(new Checkbox(headerElements[j], false));
 			}
 
-			elementsToPlotJList = new JList(selectedElements.toArray());
+			elementsToPlotJList = new JList<>(selectedElements);
 			elementsToPlotJList
 					.addListSelectionListener(new ListSelectionListener() {
 						public void valueChanged(ListSelectionEvent e) {
@@ -242,7 +242,7 @@ public class MainMenu extends JFrame {
 			this.getContentPane().add(middlePanel, BorderLayout.SOUTH);
 
 			JPanel bottomPanel = new JPanel(new BorderLayout());
-			plottingMethodsJComboBox = new JComboBox(plottingMethods);
+			plottingMethodsJComboBox = new JComboBox<>(plottingMethods);
 			plottingMethodsJComboBox
 					.setToolTipText("Select your plotting method");
 			JLabel choicesLabel = new JLabel("Choose your plotting Method: ");
@@ -351,7 +351,7 @@ public class MainMenu extends JFrame {
 		return false;
 	}
 
-	private class MyCellRenderer extends JLabel implements ListCellRenderer {
+	private class MyCellRenderer extends JLabel implements ListCellRenderer<Checkbox> {
 
 		/**
 		 * For serializing.
@@ -362,14 +362,14 @@ public class MainMenu extends JFrame {
 		 * This is the only method defined by ListCellRenderer. We just
 		 * reconfigure the JLabel each time we're called.
 		 */
-		public Component getListCellRendererComponent(JList list, Object value, // value
+		public Component getListCellRendererComponent(JList<? extends Checkbox> list, Checkbox value, // value
 				// to
 				// display
 				int index, // cell index
 				boolean isSelected, // is the cell selected
 				boolean cellHasFocus) // the list and the cell have the focus
 		{
-			String s = ((Checkbox) value).getLabel();
+			String s = value.getLabel();
 			setText(s);
 
 			if (isSelected) {
