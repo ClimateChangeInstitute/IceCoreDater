@@ -112,9 +112,8 @@ public class ChartJFrame extends JFrame {
 	private static final long serialVersionUID = -1661569671686108421L;
 
 	/**
-	 * A 2-D array that holds the values of the elements. First subscript is for
-	 * the element itself and the second subscript is for the values of that
-	 * element
+	 * A 2-D array that holds the values of the elements. First subscript is for the
+	 * element itself and the second subscript is for the values of that element
 	 */
 	private Double[][] elementValuesDoubles = null;
 	/**
@@ -216,8 +215,8 @@ public class ChartJFrame extends JFrame {
 	 */
 	private List<Double>[] elementValues;
 	/**
-	 * An array of booleans that hold values of whether an element was selected
-	 * for plotting or not
+	 * An array of booleans that hold values of whether an element was selected for
+	 * plotting or not
 	 */
 	private boolean[] selected;
 	/**
@@ -229,8 +228,7 @@ public class ChartJFrame extends JFrame {
 	 */
 	private Point2D panStartPoint;
 	/**
-	 * A boolean array that hold values of whether an element is in log mode or
-	 * not
+	 * A boolean array that hold values of whether an element is in log mode or not
 	 */
 	private boolean[] logs;
 	/**
@@ -256,11 +254,9 @@ public class ChartJFrame extends JFrame {
 	/**
 	 * GUI Controls
 	 */
-	private JButton generateReport, importSession, mainMenu, setRangeAxis,
-			viewReport;
+	private JButton generateReport, importSession, mainMenu, setRangeAxis, viewReport;
 
-	private JToggleButton deleteButton, recordButton, panButton, textButton,
-			xzoom;
+	private JToggleButton deleteButton, recordButton, panButton, textButton, xzoom;
 	private JMenuBar menuBar;
 	private JCheckBox log;
 	private JCheckBoxMenuItem tubesJCheckBox;
@@ -291,8 +287,7 @@ public class ChartJFrame extends JFrame {
 	 * @throws DataFileException
 	 * @throws FileNotFoundException
 	 */
-	public ChartJFrame() throws FileNotFoundException, DataFileException,
-			IOException {
+	public ChartJFrame() throws FileNotFoundException, DataFileException, IOException {
 		buttonGroup = new ButtonGroup();
 		run("");
 	}
@@ -301,24 +296,18 @@ public class ChartJFrame extends JFrame {
 	 * Constructor that is called when the user selects to start a new dating
 	 * session
 	 * 
-	 * @param correctedFile
-	 *            Ice sheet file to be dated (after being corrected)
-	 * @param topYear
-	 *            top year of the core
-	 * @param numOfElements
-	 *            total number of elements in the file
-	 * @param selectedElements
-	 *            a vector that contains ALL the elements in the file
-	 * @param selectedMethod
-	 *            a string that represents the selected plotting method
+	 * @param correctedFile    Ice sheet file to be dated (after being corrected)
+	 * @param topYear          top year of the core
+	 * @param numOfElements    total number of elements in the file
+	 * @param selectedElements a vector that contains ALL the elements in the file
+	 * @param selectedMethod   a string that represents the selected plotting method
 	 * @throws IOException
 	 * @throws DataFileException
 	 * @throws FileNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public ChartJFrame(File correctedFile, int topYear, int numOfElements,
-			List<Checkbox> selectedElements, String selectedMethod)
-			throws FileNotFoundException, DataFileException, IOException {
+	public ChartJFrame(File correctedFile, int topYear, int numOfElements, List<Checkbox> selectedElements,
+			String selectedMethod) throws FileNotFoundException, DataFileException, IOException {
 		buttonGroup = new ButtonGroup();
 		this.correctedFile = correctedFile;
 
@@ -347,16 +336,13 @@ public class ChartJFrame extends JFrame {
 	 * Constructor that is called when the user selects to continue an existing
 	 * dating session
 	 * 
-	 * @param tempFile
-	 *            Ice sheet file to be dated (after being corrected)
-	 * @param reportFile
-	 *            report file
+	 * @param tempFile   Ice sheet file to be dated (after being corrected)
+	 * @param reportFile report file
 	 * @throws IOException
 	 * @throws DataFileException
 	 * @throws FileNotFoundException
 	 */
-	public ChartJFrame(File tempFile, File reportFile)
-			throws FileNotFoundException, DataFileException, IOException {
+	public ChartJFrame(File tempFile, File reportFile) throws FileNotFoundException, DataFileException, IOException {
 
 		this.correctedFile = tempFile;
 		this.reportFile = reportFile;
@@ -364,19 +350,17 @@ public class ChartJFrame extends JFrame {
 	}
 
 	/**
-	 * Main method that does the plotting. The method is called from the run
-	 * method
+	 * Main method that does the plotting. The method is called from the run method
 	 * 
 	 * @throws DataFileException
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	private void plot() throws DataFileException, FileNotFoundException,
-			IOException {
+	private void plot() throws DataFileException, FileNotFoundException, IOException {
 		/*
-		 * check first to see if we have a report file (user selected to
-		 * continue a session)
+		 * check first to see if we have a report file (user selected to continue a
+		 * session)
 		 */
 		if (reportFile != null) {
 			readReportFile(reportFile);
@@ -385,9 +369,9 @@ public class ChartJFrame extends JFrame {
 		int rowsNumber = loadCorrectedFile(correctedFile);
 
 		/*
-		 * The values in XValues list are stored as Double objects. However
-		 * JFreeChart library require the values to be stored in an array as
-		 * double primitives. The code below does that job
+		 * The values in XValues list are stored as Double objects. However JFreeChart
+		 * library require the values to be stored in an array as double primitives. The
+		 * code below does that job
 		 */
 		if (xValues.size() > 0) {
 			Double xValuesDoubles[] = xValues.toArray(new Double[0]);
@@ -413,24 +397,22 @@ public class ChartJFrame extends JFrame {
 		selectedElementsNumber = 0;
 		for (int i = 0; i < elementValues.length; i++) {
 			if (elementValues[i] != null) {
-				elementValuesDoubles[selectedElementsNumber] = (Double[]) elementValues[i]
-						.toArray(new Double[0]);
+				elementValuesDoubles[selectedElementsNumber] = (Double[]) elementValues[i].toArray(new Double[0]);
 				selectedElementsNumber++;
 			}
 		}
 		elementValuesPrimitiveDoubles = new double[selectedElementsNumber][elementValuesDoubles[0].length];
 		for (int i = 0; i < selectedElementsNumber; i++) {
 			for (int j = 0; j < elementValuesDoubles[0].length; j++) {
-				elementValuesPrimitiveDoubles[i][j] = elementValuesDoubles[i][j]
-						.doubleValue();
+				elementValuesPrimitiveDoubles[i][j] = elementValuesDoubles[i][j].doubleValue();
 			}
 		}
 		/*
 		 * Now we have our data ready! XValues are stored inside
-		 * xValuesDoublesPrimitives[] array while Y values for elements are
-		 * stored in a 2-D array elementValuesPrimitiveDoubles[][] where the
-		 * first subscript is the element number and the 2nd subscript is the
-		 * values associated with that element.
+		 * xValuesDoublesPrimitives[] array while Y values for elements are stored in a
+		 * 2-D array elementValuesPrimitiveDoubles[][] where the first subscript is the
+		 * element number and the 2nd subscript is the values associated with that
+		 * element.
 		 */
 
 		// We are ready now to call our method that creates the chart
@@ -443,39 +425,32 @@ public class ChartJFrame extends JFrame {
 		chartPanel.setPreferredSize(new java.awt.Dimension(600, 400));
 		chartPanel.setAutoscrolls(true);
 
-		final JCheckBoxMenuItem pointShapes = new JCheckBoxMenuItem(
-				"Points Shapes");
+		final JCheckBoxMenuItem pointShapes = new JCheckBoxMenuItem("Points Shapes");
 		pointShapes.setState(false);
 		pointShapes.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (pointShapes.getState()) {
 					for (int i = 0; i < subPlots.size(); i++) {
-						setAllShapesVisibleOnPlot(
-								(XYLineAndShapeRenderer) subPlots.get(i)
-										.getRenderer(), subPlots.get(i), true);
+						setAllShapesVisibleOnPlot((XYLineAndShapeRenderer) subPlots.get(i).getRenderer(),
+								subPlots.get(i), true);
 					}
 				} else {
 					for (int i = 0; i < subPlots.size(); i++) {
-						setAllShapesVisibleOnPlot(
-								(XYLineAndShapeRenderer) subPlots.get(i)
-										.getRenderer(), subPlots.get(i), false);
+						setAllShapesVisibleOnPlot((XYLineAndShapeRenderer) subPlots.get(i).getRenderer(),
+								subPlots.get(i), false);
 					}
 				}
 			}
 
 			/**
-			 * Sets all of the shapes visible for each renderer, of each dataset
-			 * in the given plot.
+			 * Sets all of the shapes visible for each renderer, of each dataset in the
+			 * given plot.
 			 * 
-			 * @param renderer
-			 *            The renderer for the plot
-			 * @param subPlot
-			 *            The subplot to have shapes set visible to
-			 * @param showShapes
-			 *            Renderer the shapes if true
+			 * @param renderer   The renderer for the plot
+			 * @param subPlot    The subplot to have shapes set visible to
+			 * @param showShapes Renderer the shapes if true
 			 */
-			private void setAllShapesVisibleOnPlot(
-					XYLineAndShapeRenderer renderer, XYPlot subPlot,
+			private void setAllShapesVisibleOnPlot(XYLineAndShapeRenderer renderer, XYPlot subPlot,
 					boolean showShapes) {
 				int dataSetCount = subPlot.getDatasetCount();
 				for (int n = 0; n < dataSetCount; n++) {
@@ -492,21 +467,18 @@ public class ChartJFrame extends JFrame {
 		chartPanel.getPopupMenu().addSeparator();
 		chartPanel.getPopupMenu().add(pointShapes);
 
-		tubesJCheckBox = new JCheckBoxMenuItem(
-				new AbstractAction("Show Tubes") {
+		tubesJCheckBox = new JCheckBoxMenuItem(new AbstractAction("Show Tubes") {
 
-					/**
-					 * For serializing
-					 */
-					private static final long serialVersionUID = -361339025532271614L;
+			/**
+			 * For serializing
+			 */
+			private static final long serialVersionUID = -361339025532271614L;
 
-					public void actionPerformed(ActionEvent arg0) {
-						((IceCombinedDomainXYPlot) chart.getPlot())
-								.setDrawIntervalMarkers(tubesJCheckBox
-										.isSelected());
-					}
+			public void actionPerformed(ActionEvent arg0) {
+				((IceCombinedDomainXYPlot) chart.getPlot()).setDrawIntervalMarkers(tubesJCheckBox.isSelected());
+			}
 
-				});
+		});
 
 		chartPanel.getPopupMenu().add(tubesJCheckBox);
 
@@ -558,10 +530,8 @@ public class ChartJFrame extends JFrame {
 		plot = (CombinedDomainXYPlot) chartPanel.getChart().getXYPlot();
 		subPlots = (List<XYPlot>) plot.getSubplots();
 		// display values in min Y and max Y field
-		minYField.setValue(subPlots.get(elementAxis.getSelectedIndex())
-				.getRangeAxis().getLowerBound());
-		maxYField.setValue(subPlots.get(elementAxis.getSelectedIndex())
-				.getRangeAxis().getUpperBound());
+		minYField.setValue(subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().getLowerBound());
+		maxYField.setValue(subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().getUpperBound());
 
 		log = new JCheckBox(new AbstractAction("Log values") {
 			/**
@@ -578,15 +548,13 @@ public class ChartJFrame extends JFrame {
 		logs = new boolean[selectedElementsNumber];
 
 		/*
-		 * add item listener to Element ComboBox (that changes values in Min y
-		 * and max Y text fields).
+		 * add item listener to Element ComboBox (that changes values in Min y and max Y
+		 * text fields).
 		 */
 		elementAxis.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				minYField.setValue(subPlots.get(elementAxis.getSelectedIndex())
-						.getRangeAxis().getLowerBound());
-				maxYField.setValue(subPlots.get(elementAxis.getSelectedIndex())
-						.getRangeAxis().getUpperBound());
+				minYField.setValue(subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().getLowerBound());
+				maxYField.setValue(subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().getUpperBound());
 				log.setSelected(logs[elementAxis.getSelectedIndex()]);
 			}
 		});
@@ -610,8 +578,7 @@ public class ChartJFrame extends JFrame {
 		main.add(yAxisPanel, BorderLayout.SOUTH);
 
 		// creates a check box for zooming
-		xzoom = new JToggleButton("Zoom", new ImageIcon(getClass().getResource(
-				IceCoreDating.imageDir + "/zoom.gif")));
+		xzoom = new JToggleButton("Zoom", new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/zoom.gif")));
 		// if user checked the zoom check box, allow zooming on the chart and
 		// create cross-hairs
 		xzoom.addItemListener(new ItemListener() {
@@ -631,8 +598,8 @@ public class ChartJFrame extends JFrame {
 		final JPanel recordPanel = new JPanel();
 		recordPanel.add(recordButton);
 		// create pan button
-		panButton = new JToggleButton("Pan", new ImageIcon(getClass()
-				.getResource(IceCoreDating.imageDir + "/pan.gif")));
+		panButton = new JToggleButton("Pan",
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/pan.gif")));
 		panButton.setText("Pan");
 		panButton.setToolTipText("Press to pan chart");
 		panButton.addActionListener(new ActionListener() {
@@ -664,8 +631,7 @@ public class ChartJFrame extends JFrame {
 			public void mousePressed(final MouseEvent event) {
 				try {
 					if (panButton.isSelected()) {
-						final Rectangle2D dataArea = chartPanel
-								.getScreenDataArea();
+						final Rectangle2D dataArea = chartPanel.getScreenDataArea();
 						final Point2D point = event.getPoint();
 						if (dataArea.contains(point)) {
 							setPanMode(true);
@@ -674,9 +640,8 @@ public class ChartJFrame extends JFrame {
 					}
 
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,
-							"An Error had occurred:\n" + e.getMessage(),
-							"Exception", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "An Error had occurred:\n" + e.getMessage(), "Exception",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -688,9 +653,8 @@ public class ChartJFrame extends JFrame {
 						// setPanMode(false);
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,
-							"An Error had occurred:\n" + e.getMessage(),
-							"Exception", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "An Error had occurred:\n" + e.getMessage(), "Exception",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				// fixes the bug where the chart panel is not refreshed
 				// sometimes after zooming
@@ -708,8 +672,7 @@ public class ChartJFrame extends JFrame {
 			// user clicked on chart
 			public void chartMouseClicked(final ChartMouseEvent event) {
 				if (textButton.isSelected()) {
-					String text = JOptionPane.showInputDialog(null,
-							"Enter text");
+					String text = JOptionPane.showInputDialog(null, "Enter text");
 					if (comments == null) {
 						comments = new ArrayList<XYTextAnnotation>();
 					}
@@ -717,8 +680,7 @@ public class ChartJFrame extends JFrame {
 						commentedPlot = new ArrayList<Integer>();
 					}
 					if (text != null) {
-						XYTextAnnotation annotation = new XYTextAnnotation(
-								text, getXCoordinates(event),
+						XYTextAnnotation annotation = new XYTextAnnotation(text, getXCoordinates(event),
 								getYCoordinates(event));
 						comments.add(annotation);
 						commentedPlot.add(new Integer(selectedPlot));
@@ -744,9 +706,8 @@ public class ChartJFrame extends JFrame {
 					ArrayList<Double> xxList = new ArrayList<Double>();
 					xxList.add(new Double(xx));
 					/**
-					 * Added: 07/17/2005: Second condition in the if statement
-					 * to solve the unexpected behavior if user had imported a
-					 * report
+					 * Added: 07/17/2005: Second condition in the if statement to solve the
+					 * unexpected behavior if user had imported a report
 					 */
 					if (numberOfClicks == 0 && year.size() == 0) {
 						depthRange.add(new Double(xx));
@@ -767,15 +728,12 @@ public class ChartJFrame extends JFrame {
 								break;
 							} else if (xx < depthRange.get(i).doubleValue()) {
 								depthRange.add(i, new Double(xx));
-								year.add(i, new Integer(
-										(year.get(i).intValue())));
+								year.add(i, new Integer((year.get(i).intValue())));
 								for (int j = i + 1; j < depthRange.size(); j++) {
 									if (topYear >= 0) {
-										year.set(j, new Integer((year.get(j)
-												.intValue()) - 1));
+										year.set(j, new Integer((year.get(j).intValue()) - 1));
 									} else {
-										year.set(j, new Integer((year.get(j)
-												.intValue()) + 1));
+										year.set(j, new Integer((year.get(j).intValue()) + 1));
 									}
 								}
 								inserted = true;
@@ -786,11 +744,9 @@ public class ChartJFrame extends JFrame {
 							depthRange.add(new Double(xx));
 							int modifiedYear = 0;
 							if (topYear >= 0) {
-								modifiedYear = (year.get(year.size() - 1)
-										.intValue()) - 1;
+								modifiedYear = (year.get(year.size() - 1).intValue()) - 1;
 							} else {
-								modifiedYear = (year.get(year.size() - 1)
-										.intValue()) + 1;
+								modifiedYear = (year.get(year.size() - 1).intValue()) + 1;
 							}
 							year.add(new Integer(modifiedYear));
 						}
@@ -815,14 +771,11 @@ public class ChartJFrame extends JFrame {
 			public void mouseDragged(final MouseEvent event) {
 				try {
 					if (panStartPoint != null) {
-						final Rectangle2D scaledDataArea = chartPanel
-								.getScreenDataArea();
-						panStartPoint = ShapeUtilities.getPointInRectangle(
-								panStartPoint.getX(), panStartPoint.getY(),
+						final Rectangle2D scaledDataArea = chartPanel.getScreenDataArea();
+						panStartPoint = ShapeUtilities.getPointInRectangle(panStartPoint.getX(), panStartPoint.getY(),
 								scaledDataArea);
-						Point2D panEndPoint = ShapeUtilities
-								.getPointInRectangle(event.getX(),
-										event.getY(), scaledDataArea);
+						Point2D panEndPoint = ShapeUtilities.getPointInRectangle(event.getX(), event.getY(),
+								scaledDataArea);
 
 						// horizontal pan
 						final XYPlot plot = chart.getXYPlot();
@@ -832,16 +785,11 @@ public class ChartJFrame extends JFrame {
 							final ValueAxis xAxis = hvp.getDomainAxis();
 
 							if (xAxis != null) {
-								final double translatedStartPoint = xAxis
-										.java2DToValue((float) panStartPoint
-												.getX(), scaledDataArea, hvp
-												.getDomainAxisEdge());
-								final double translatedEndPoint = xAxis
-										.java2DToValue((float) panEndPoint
-												.getX(), scaledDataArea, hvp
-												.getDomainAxisEdge());
-								final double dX = translatedStartPoint
-										- translatedEndPoint;
+								final double translatedStartPoint = xAxis.java2DToValue((float) panStartPoint.getX(),
+										scaledDataArea, hvp.getDomainAxisEdge());
+								final double translatedEndPoint = xAxis.java2DToValue((float) panEndPoint.getX(),
+										scaledDataArea, hvp.getDomainAxisEdge());
+								final double dX = translatedStartPoint - translatedEndPoint;
 								final double oldMin = xAxis.getLowerBound();
 								final double newMin = oldMin + dX;
 
@@ -861,16 +809,11 @@ public class ChartJFrame extends JFrame {
 							final ValueAxis yAxis = vvp.getRangeAxis();
 
 							if (yAxis != null) {
-								final double translatedStartPoint = yAxis
-										.java2DToValue((float) panStartPoint
-												.getY(), scaledDataArea, vvp
-												.getRangeAxisEdge());
-								final double translatedEndPoint = yAxis
-										.java2DToValue((float) panEndPoint
-												.getY(), scaledDataArea, vvp
-												.getRangeAxisEdge());
-								final double dY = translatedStartPoint
-										- translatedEndPoint;
+								final double translatedStartPoint = yAxis.java2DToValue((float) panStartPoint.getY(),
+										scaledDataArea, vvp.getRangeAxisEdge());
+								final double translatedEndPoint = yAxis.java2DToValue((float) panEndPoint.getY(),
+										scaledDataArea, vvp.getRangeAxisEdge());
+								final double dY = translatedStartPoint - translatedEndPoint;
 
 								final double oldMin = yAxis.getLowerBound();
 								final double newMin = oldMin + dY;
@@ -879,8 +822,7 @@ public class ChartJFrame extends JFrame {
 								final double newMax = oldMax + dY;
 
 								// do not pan out of range
-								if (newMin >= primYMinMax[0]
-										&& newMax <= primYMinMax[1]) {
+								if (newMin >= primYMinMax[0] && newMax <= primYMinMax[1]) {
 									yAxis.setLowerBound(newMin);
 									yAxis.setUpperBound(newMax);
 								}
@@ -893,16 +835,11 @@ public class ChartJFrame extends JFrame {
 							final ValueAxis yAxis = xyPlot.getRangeAxis(1);
 
 							if (yAxis != null) {
-								final double translatedStartPoint = yAxis
-										.java2DToValue((float) panStartPoint
-												.getY(), scaledDataArea, xyPlot
-												.getRangeAxisEdge(1));
-								final double translatedEndPoint = yAxis
-										.java2DToValue((float) panEndPoint
-												.getY(), scaledDataArea, xyPlot
-												.getRangeAxisEdge(1));
-								final double dY = translatedStartPoint
-										- translatedEndPoint;
+								final double translatedStartPoint = yAxis.java2DToValue((float) panStartPoint.getY(),
+										scaledDataArea, xyPlot.getRangeAxisEdge(1));
+								final double translatedEndPoint = yAxis.java2DToValue((float) panEndPoint.getY(),
+										scaledDataArea, xyPlot.getRangeAxisEdge(1));
+								final double dY = translatedStartPoint - translatedEndPoint;
 
 								final double oldMin = yAxis.getLowerBound();
 								final double newMin = oldMin + dY;
@@ -910,8 +847,7 @@ public class ChartJFrame extends JFrame {
 								final double oldMax = yAxis.getUpperBound();
 								final double newMax = oldMax + dY;
 
-								if (newMin >= secondYMinMax[0]
-										&& newMax <= secondYMinMax[1]) {
+								if (newMin >= secondYMinMax[0] && newMax <= secondYMinMax[1]) {
 									yAxis.setLowerBound(newMin);
 									yAxis.setUpperBound(newMax);
 								}
@@ -922,9 +858,8 @@ public class ChartJFrame extends JFrame {
 						panStartPoint = panEndPoint;
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,
-							"An Error had occurred:\n" + e.getMessage(),
-							"Exception", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "An Error had occurred:\n" + e.getMessage(), "Exception",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -932,9 +867,8 @@ public class ChartJFrame extends JFrame {
 		// view report button
 		viewReport = new JButton("View Report");
 		viewReport.setToolTipText("Click to view your report");
-		viewReport.setAction(new ViewReportAction("View Report", new ImageIcon(
-				getClass().getResource(IceCoreDating.imageDir + "/view.gif")),
-				"View Report", null));
+		viewReport.setAction(new ViewReportAction("View Report",
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/view.gif")), "View Report", null));
 		viewReport.getAction().setEnabled(false);
 		if (reportFile != null) {
 			viewReport.setEnabled(true);
@@ -942,17 +876,15 @@ public class ChartJFrame extends JFrame {
 		// import session button
 		importSession = new JButton("Import an Existing Report");
 		importSession.setToolTipText("Imports an existing report");
-		importSession.setAction(new ImportSessionAction(
-				"Import an Existing Report", new ImageIcon(getClass()
-						.getResource(IceCoreDating.imageDir + "/import.gif")),
+		importSession.setAction(new ImportSessionAction("Import an Existing Report",
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/import.gif")),
 				"Import an Existing Report", null));
 		// generate report button
 		generateReport = new JButton("Generate Report");
 		generateReport.setToolTipText("Click to generate your report");
 		generateReport.setAction(new GenerateReportAction("Generate Report",
-				new ImageIcon(getClass().getResource(
-						IceCoreDating.imageDir + "/report.gif")),
-				"Generate Report", null));
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/report.gif")), "Generate Report",
+				null));
 
 		// add buttons to the record panel
 		recordPanel.add(generateReport);
@@ -960,18 +892,15 @@ public class ChartJFrame extends JFrame {
 		recordPanel.add(importSession);
 
 		// Main Menu button
-		mainMenu = new JButton("Main Menu", new ImageIcon(getClass()
-				.getResource(IceCoreDating.imageDir + "/undo.gif")));
+		mainMenu = new JButton("Main Menu",
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/undo.gif")));
 		mainMenu.setToolTipText("Return to the main menu");
 		mainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// user tried to exit without saving
 				if (reportFile == null) {
-					int answer = JOptionPane
-							.showConfirmDialog(
-									null,
-									"Report file not generated yet. You sure you want to exit? ",
-									"Exit", 2);
+					int answer = JOptionPane.showConfirmDialog(null,
+							"Report file not generated yet. You sure you want to exit? ", "Exit", 2);
 					if (answer == 0 && correctedFile != null) {
 						dispose();
 						new MainMenu(correctedFile);
@@ -999,8 +928,8 @@ public class ChartJFrame extends JFrame {
 		chartMenu.add(new JMenuItem(viewReport.getAction()));
 		chartMenu.add(new JMenuItem(importSession.getAction()));
 
-		FileMenu.add(new JMenuItem(new AbstractAction("Exit", new ImageIcon(
-				getClass().getResource(IceCoreDating.imageDir + "/exit.gif"))) {
+		FileMenu.add(new JMenuItem(new AbstractAction("Exit",
+				new ImageIcon(getClass().getResource(IceCoreDating.imageDir + "/exit.gif"))) {
 			/**
 			 * For serializing.
 			 */
@@ -1027,8 +956,7 @@ public class ChartJFrame extends JFrame {
 		this.setSize(700, 600);
 		// show and center main frame
 		RefineryUtilities.centerFrameOnScreen(this);
-		this.setTitle(correctedFile.getName().substring(0,
-				correctedFile.getName().indexOf("Corrected")));
+		this.setTitle(correctedFile.getName().substring(0, correctedFile.getName().indexOf("Corrected")));
 
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1041,15 +969,13 @@ public class ChartJFrame extends JFrame {
 		}
 
 		for (IntervalMarker marker : intervalList) {
-			((CombinedDomainXYPlot) chart.getPlot()).addDomainMarker(marker,
-					Layer.BACKGROUND);
+			((CombinedDomainXYPlot) chart.getPlot()).addDomainMarker(marker, Layer.BACKGROUND);
 		}
 
 		// Enable mouse zooming by default.
 		setMouseZoom(true);
 
-		NumberAxis domain = ((NumberAxis) ((CombinedDomainXYPlot) chart
-				.getPlot()).getDomainAxis());
+		NumberAxis domain = ((NumberAxis) ((CombinedDomainXYPlot) chart.getPlot()).getDomainAxis());
 
 		domain.setAutoRangeIncludesZero(false);
 		domain.setAutoRangeStickyZero(false);
@@ -1060,8 +986,7 @@ public class ChartJFrame extends JFrame {
 		this.validate();
 		this.pack();
 		this.setVisible(true);
-		
-		
+
 	} // plot
 
 	/**
@@ -1069,17 +994,15 @@ public class ChartJFrame extends JFrame {
 	 * structures.
 	 * 
 	 * @return The number of elements read from the file.
-	 * @throws DataFileException
-	 *             Thrown if there is an error parsing the file.
+	 * @throws DataFileException Thrown if there is an error parsing the file.
 	 */
 	private int loadCorrectedFile(File correctedFile) throws DataFileException {
 
 		/*
-		 * SelectedElements is a List of check boxes. Those check boxes came
-		 * from the previous main menu where the user selected what elements to
-		 * plot. Notice that selectedElements contain ALL the elements in the
-		 * file and if the user had selected any to plot then it's state will be
-		 * set to true
+		 * SelectedElements is a List of check boxes. Those check boxes came from the
+		 * previous main menu where the user selected what elements to plot. Notice that
+		 * selectedElements contain ALL the elements in the file and if the user had
+		 * selected any to plot then it's state will be set to true
 		 */
 		Checkbox[] elements = new Checkbox[selectedElements.size()];
 		for (int i = 0; i < selectedElements.size(); i++) {
@@ -1099,8 +1022,8 @@ public class ChartJFrame extends JFrame {
 		try {
 
 			/*
-			 * Start reading from the corrected file. We store the element
-			 * values in a list associated with each element.
+			 * Start reading from the corrected file. We store the element values in a list
+			 * associated with each element.
 			 */
 			br = new BufferedReader(new FileReader(correctedFile));
 
@@ -1112,8 +1035,7 @@ public class ChartJFrame extends JFrame {
 			double previousTop = -1, previousBottom = Double.MAX_VALUE;
 
 			// blue and green colors.
-			Color c1 = new Color(222, 222, 255, 148), c2 = new Color(222, 255,
-					222, 128);
+			Color c1 = new Color(222, 222, 255, 148), c2 = new Color(222, 255, 222, 128);
 
 			while ((line = br.readLine()) != null) {
 				rowsNumber++;
@@ -1123,8 +1045,7 @@ public class ChartJFrame extends JFrame {
 				if (rowsNumber == 1) {
 					previousTubeName = currentTubeName;
 
-					String t = line.substring(line.indexOf(",") + 1, line
-							.length());
+					String t = line.substring(line.indexOf(",") + 1, line.length());
 
 					tubeStart = Double.valueOf(t.substring(0, t.indexOf(",")));
 				}
@@ -1132,9 +1053,8 @@ public class ChartJFrame extends JFrame {
 				// read element values first
 				for (int i = 0; i < elements.length; i++) {
 					/*
-					 * We only want to read the values of the elements that have
-					 * been selected for plotting, so we check their state
-					 * first.
+					 * We only want to read the values of the elements that have been selected for
+					 * plotting, so we check their state first.
 					 */
 					if (elements[i].getState()) {
 						if (elementValues[i] == null) {
@@ -1143,13 +1063,11 @@ public class ChartJFrame extends JFrame {
 						selected[i] = true;
 
 						// Skip the tube column
-						String temp = line.substring(line.indexOf(",") + 1,
-								line.length());
+						String temp = line.substring(line.indexOf(",") + 1, line.length());
 
 						// Skip top and bottom and everything before
 						for (int j = 0; j < i + 2; j++) {
-							temp = temp.substring(temp.indexOf(",") + 1, temp
-									.length());
+							temp = temp.substring(temp.indexOf(",") + 1, temp.length());
 						}
 
 						// Extract the actual value
@@ -1160,8 +1078,8 @@ public class ChartJFrame extends JFrame {
 						}
 
 						/*
-						 * Now we have reached the value we are interested in.
-						 * Add it to the list associated with that element.
+						 * Now we have reached the value we are interested in. Add it to the list
+						 * associated with that element.
 						 */
 						elementValues[i].add(Double.valueOf(temp));
 					}
@@ -1170,30 +1088,23 @@ public class ChartJFrame extends JFrame {
 				// read x values now, depending on plotting method selected
 				if (selectedMethod.equals("Top point")) {
 					/*
-					 * To make it easier how reading is done, open the ice sheet
-					 * file and notice that we are interested in reading the 2nd
-					 * column
+					 * To make it easier how reading is done, open the ice sheet file and notice
+					 * that we are interested in reading the 2nd column
 					 */
-					String temp = line.substring(line.indexOf(",") + 1, line
-							.length());
+					String temp = line.substring(line.indexOf(",") + 1, line.length());
 					temp = temp.substring(0, temp.indexOf(","));
 					// add the value we read to xValues linked List
 					xValues.add(Double.valueOf(temp));
 				} else if (selectedMethod.equals("Bottom point")) {
-					String temp = line.substring(line.indexOf(",") + 1, line
-							.length());
+					String temp = line.substring(line.indexOf(",") + 1, line.length());
 					temp = temp.substring(temp.indexOf(",") + 1, temp.length());
 					temp = temp.substring(0, temp.indexOf(","));
 					xValues.add(Double.valueOf(temp));
-				} else if (selectedMethod
-						.equals("Midpoint between top and bottom")) {
-					String temp = line.substring(line.indexOf(",") + 1, line
-							.length());
-					double topDepth = Double.parseDouble(temp.substring(0, temp
-							.indexOf(",")));
+				} else if (selectedMethod.equals("Midpoint between top and bottom")) {
+					String temp = line.substring(line.indexOf(",") + 1, line.length());
+					double topDepth = Double.parseDouble(temp.substring(0, temp.indexOf(",")));
 					temp = temp.substring(temp.indexOf(",") + 1, temp.length());
-					double bottomDepth = Double.parseDouble(temp.substring(0,
-							temp.indexOf(",")));
+					double bottomDepth = Double.parseDouble(temp.substring(0, temp.indexOf(",")));
 					double middleValue = (topDepth + bottomDepth) / 2;
 					xValues.add(new Double(middleValue));
 				}
@@ -1201,19 +1112,16 @@ public class ChartJFrame extends JFrame {
 				newTube = !currentTubeName.equals(previousTubeName);
 				if (newTube) {
 
-					String t = line.substring(line.indexOf(",") + 1, line
-							.length());
+					String t = line.substring(line.indexOf(",") + 1, line.length());
 
 					// This is the top of the next new tube
 					tubeBottom = Double.valueOf(t.substring(0, t.indexOf(",")));
 
 					if (isC1) {
-						intervalList.add(new IntervalMarker(tubeStart,
-								tubeBottom, c1));
+						intervalList.add(new IntervalMarker(tubeStart, tubeBottom, c1));
 						isC1 = false;
 					} else {
-						intervalList.add(new IntervalMarker(tubeStart,
-								tubeBottom, c2));
+						intervalList.add(new IntervalMarker(tubeStart, tubeBottom, c2));
 						isC1 = true;
 					}
 
@@ -1223,39 +1131,31 @@ public class ChartJFrame extends JFrame {
 
 				lastLine = line;
 
-				String ts = line
-						.substring(line.indexOf(",") + 1, line.length());
+				String ts = line.substring(line.indexOf(",") + 1, line.length());
 
 				// top depth
 				double top = Double.valueOf(ts.substring(0, ts.indexOf(",")));
 				ts = ts.substring(ts.indexOf(",") + 1, ts.length());
 
 				// bottom depth
-				double bottom = Double
-						.valueOf(ts.substring(0, ts.indexOf(",")));
+				double bottom = Double.valueOf(ts.substring(0, ts.indexOf(",")));
 
 				// Do some sanity checks with the data
 				if (top > bottom) {
 					throw new DataFileException(
-							"The top value was greater than the "
-									+ "bottom value on the same row. "
-									+ "Are the first three columns "
-									+ "tube, top depth, bottom depth?", line,
-							rowsNumber);
+							"The top value was greater than the " + "bottom value on the same row. "
+									+ "Are the first three columns " + "tube, top depth, bottom depth?",
+							line, rowsNumber);
 				}
 				if (top < previousTop) {
-					throw new DataFileException(
-							"The top value was less than the "
-									+ "top value on the previous row. "
-									+ "Make sure the rows are ordered "
-									+ "ascendingly by depth.", line, rowsNumber);
+					throw new DataFileException("The top value was less than the " + "top value on the previous row. "
+							+ "Make sure the rows are ordered " + "ascendingly by depth.", line, rowsNumber);
 				}
 				if (bottom < previousBottom && rowsNumber != 1) {
 					throw new DataFileException(
-							"The bottom value was less than the "
-									+ "bottom value on the previous row. "
-									+ "Make sure the rows are ordered "
-									+ "ascendingly by depth.", line, rowsNumber);
+							"The bottom value was less than the " + "bottom value on the previous row. "
+									+ "Make sure the rows are ordered " + "ascendingly by depth.",
+							line, rowsNumber);
 				}
 
 				previousTop = top;
@@ -1264,13 +1164,12 @@ public class ChartJFrame extends JFrame {
 			} // while
 			br.close();
 
-			String t = lastLine.substring(lastLine.indexOf(",") + 1, lastLine
-					.length());
+			String t = lastLine.substring(lastLine.indexOf(",") + 1, lastLine.length());
 
 			t = t.substring(t.indexOf(",") + 1, t.length());
 
 			tubeBottom = Double.valueOf(t.substring(0, t.indexOf(",")));
-			
+
 			if (isC1) {
 				intervalList.add(new IntervalMarker(tubeStart, tubeBottom, c1));
 			} else {
@@ -1279,37 +1178,29 @@ public class ChartJFrame extends JFrame {
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			throw new DataFileException(
-					"A value was found that was not a number.", line,
-					rowsNumber);
+			throw new DataFileException("A value was found that was not a number.", line, rowsNumber);
 		} catch (IOException ioe) {
 			throw new DataFileException(
-					"Unable to read the file. Is it currently being used by "
-							+ "another application?", line, 0);
+					"Unable to read the file. Is it currently being used by " + "another application?", line, 0);
 		} catch (DataFileException e) {
 			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new DataFileException("An unknown error occurred while "
-					+ "trying to read the file.", line, 0);
+			throw new DataFileException("An unknown error occurred while " + "trying to read the file.", line, 0);
 		}
 		return rowsNumber;
 	}
 
 	/**
-	 * Reads in a report file and initializes the related fields in the
-	 * ChartJFrame.
+	 * Reads in a report file and initializes the related fields in the ChartJFrame.
 	 * 
-	 * @param reportFile
-	 *            The report file to be read. (not null)
-	 * @throws FileNotFoundException
-	 *             Thrown if the file is not found.
-	 * @throws IOException
-	 *             Thrown if there is a problem reading from the file.
+	 * @param reportFile The report file to be read. (not null)
+	 * @throws FileNotFoundException Thrown if the file is not found.
+	 * @throws IOException           Thrown if there is a problem reading from the
+	 *                               file.
 	 */
 	@SuppressWarnings("unchecked")
-	private void readReportFile(File reportFile) throws FileNotFoundException,
-			IOException {
+	private void readReportFile(File reportFile) throws FileNotFoundException, IOException {
 		// read from the report file and fill up corresponding fields
 		br = new BufferedReader(new FileReader(reportFile));
 		// fill up top year
@@ -1322,8 +1213,7 @@ public class ChartJFrame extends JFrame {
 		selectedElements = new ArrayList<Checkbox>();
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			selectedElements.add(new Checkbox("element", (Boolean.valueOf(token
-					.toLowerCase().trim())).booleanValue()));
+			selectedElements.add(new Checkbox("element", (Boolean.valueOf(token.toLowerCase().trim())).booleanValue()));
 		}
 		elementValues = new ArrayList[selectedElements.size()];
 		selected = new boolean[selectedElements.size()];
@@ -1342,22 +1232,19 @@ public class ChartJFrame extends JFrame {
 		// fill up depth range and year linked lists
 		while ((line = br.readLine()) != null) {
 			StringTokenizer tokenizer2 = new StringTokenizer(line, ",");
-			depthRange.add(new Double(Double.parseDouble(tokenizer2.nextToken()
-					.trim())));
-			year.add(new Integer(Integer
-					.parseInt(tokenizer2.nextToken().trim())));
+			depthRange.add(new Double(Double.parseDouble(tokenizer2.nextToken().trim())));
+			year.add(new Integer(Integer.parseInt(tokenizer2.nextToken().trim())));
 		}
 	}
 
 	private AbstractButton[] getToggleButtons() {
-		return new AbstractButton[] { deleteButton, xzoom, recordButton,
-				panButton, generateReport, importSession, mainMenu, textButton };
+		return new AbstractButton[] { deleteButton, xzoom, recordButton, panButton, generateReport, importSession,
+				mainMenu, textButton };
 	}
 
 	private void setPanMode(final boolean val) {
 		if (val) {
-			chartPanel
-					.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			chartPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		} else {
 			chartPanel.setCursor(Cursor.getDefaultCursor());
 		}
@@ -1365,23 +1252,17 @@ public class ChartJFrame extends JFrame {
 
 	/**
 	 * 
-	 * @param log
-	 *            : True if user selects the log check box, false otherwise
-	 * @param minY
-	 *            : Minimum Y value
-	 * @param maxY
-	 *            : Maximum Y value
-	 * @throws Exception
-	 *             This method is called every time you press
-	 *             "Set Y axis limits" Button
+	 * @param log  : True if user selects the log check box, false otherwise
+	 * @param minY : Minimum Y value
+	 * @param maxY : Maximum Y value
+	 * @throws Exception This method is called every time you press "Set Y axis
+	 *                   limits" Button
 	 */
 	@SuppressWarnings("unchecked")
 	// Needed for dealing with raw library types
-	private void updateChart(boolean log, double minY, double maxY)
-			throws Exception {
+	private void updateChart(boolean log, double minY, double maxY) throws Exception {
 		// return a reference to the big plot that has all the subplots
-		CombinedDomainXYPlot combinedPlot = (CombinedDomainXYPlot) chartPanel
-				.getChart().getXYPlot();
+		CombinedDomainXYPlot combinedPlot = (CombinedDomainXYPlot) chartPanel.getChart().getXYPlot();
 		// a list of all subplots in the big plot
 		List<XYPlot> subPlots = (List<XYPlot>) combinedPlot.getSubplots();
 		// return a reference of the plot in the selected element in the
@@ -1391,18 +1272,18 @@ public class ChartJFrame extends JFrame {
 		setAxis(log, minY, maxY, subPlots, plot);
 
 		// draw the lines again
-		// drawLines(-1, false); // TODO Unnecessary?
+		// This appears to be necessary because the lines are not updated when the
+		// y-axis on a subplot changes.
+		drawLines(-1, false);
 
 		// repaint the whole chart
 		chartPanel.getChart().fireChartChanged();
 	}
 
-	private void setAxis(boolean log, double minY, double maxY,
-			List<XYPlot> subPlots, XYPlot plot) {
+	private void setAxis(boolean log, double minY, double maxY, List<XYPlot> subPlots, XYPlot plot) {
 		if (log) {
 			// create a new log axis
-			LogarithmicAxis logAxis = new LogarithmicAxis(elementAxis
-					.getSelectedItem().toString());
+			LogarithmicAxis logAxis = new LogarithmicAxis(elementAxis.getSelectedItem().toString());
 			logs[elementAxis.getSelectedIndex()] = true;
 			// customize logarithmic axis
 			logAxis.setAllowNegativesFlag(true);
@@ -1410,23 +1291,18 @@ public class ChartJFrame extends JFrame {
 			// assign axis to plot
 			plot.setRangeAxis(0, logAxis);
 			// set lower and upper bounds of log axis to minimum and max y
-			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis()
-					.setLowerBound(minY);
-			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis()
-					.setUpperBound(maxY);
+			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().setLowerBound(minY);
+			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().setUpperBound(maxY);
 
 		} else {
-			NumberAxis normalAxis = new NumberAxis(elementAxis
-					.getSelectedItem().toString());
+			NumberAxis normalAxis = new NumberAxis(elementAxis.getSelectedItem().toString());
 			logs[elementAxis.getSelectedIndex()] = false;
 
 			normalAxis.setAutoRange(true);
 
 			plot.setRangeAxis(0, normalAxis);
-			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis()
-					.setLowerBound(minY);
-			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis()
-					.setUpperBound(maxY);
+			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().setLowerBound(minY);
+			subPlots.get(elementAxis.getSelectedIndex()).getRangeAxis().setUpperBound(maxY);
 
 		}
 	}
@@ -1434,8 +1310,7 @@ public class ChartJFrame extends JFrame {
 	/**
 	 * 
 	 * @return Chart object
-	 * @throws Exception
-	 *             This method creates the chart displayed on screen
+	 * @throws Exception This method creates the chart displayed on screen
 	 */
 	private JFreeChart createChart() {
 
@@ -1444,9 +1319,9 @@ public class ChartJFrame extends JFrame {
 		NumberAxis numberAxis = new NumberAxis("Depth Range");
 
 		/*
-		 * Our chart is an instance of CombinedDomainXYPlot, because it contains
-		 * more than one chart (subplots) that share the same X axis but each
-		 * has it's own Y axis
+		 * Our chart is an instance of CombinedDomainXYPlot, because it contains more
+		 * than one chart (subplots) that share the same X axis but each has it's own Y
+		 * axis
 		 */
 		combinedPlot = new IceCombinedDomainXYPlot(numberAxis);
 		for (int i = 0; i < combinedPlot.getSubplots().size(); i++) {
@@ -1463,8 +1338,7 @@ public class ChartJFrame extends JFrame {
 				for (int j = 0; j < xValuesDoublesPrimitives.length; j++) {
 					// add to the series x values, and y values associated
 					// with the element selected
-					series.add(xValuesDoublesPrimitives[j],
-							elementValuesPrimitiveDoubles[elementNumber][j]);
+					series.add(xValuesDoublesPrimitives[j], elementValuesPrimitiveDoubles[elementNumber][j]);
 				}
 				elementNumber++;
 				// create a new XYSeriesCollection for the element series
@@ -1472,8 +1346,8 @@ public class ChartJFrame extends JFrame {
 				// each element has its own range (Y) axis
 				final NumberAxis rangeAxis = new NumberAxis(elementNames.get(i));
 
-				subplot = new XYPlot(dataset, combinedPlot.getDomainAxis(),
-						rangeAxis, new XYLineAndShapeRenderer(true, false));
+				subplot = new XYPlot(dataset, combinedPlot.getDomainAxis(), rangeAxis,
+						new XYLineAndShapeRenderer(true, false));
 				subplot.setBackgroundPaint(null);
 
 				// customization
@@ -1490,8 +1364,7 @@ public class ChartJFrame extends JFrame {
 		combinedPlot.setOrientation(PlotOrientation.VERTICAL);
 
 		// create your chart from the one big combined plot
-		final JFreeChart chart = new JFreeChart("IceCore Dating",
-				JFreeChart.DEFAULT_TITLE_FONT, combinedPlot, true);
+		final JFreeChart chart = new JFreeChart("IceCore Dating", JFreeChart.DEFAULT_TITLE_FONT, combinedPlot, true);
 
 		// customize your chart
 		chart.setBackgroundPaint(Color.white);
@@ -1508,12 +1381,9 @@ public class ChartJFrame extends JFrame {
 
 	/**
 	 * 
-	 * @param minY
-	 *            minimum Y value
-	 * @param maxY
-	 *            maximum Y Value
-	 * @param index
-	 *            index of the element to set Y limits for Sets Y axis values
+	 * @param minY  minimum Y value
+	 * @param maxY  maximum Y Value
+	 * @param index index of the element to set Y limits for Sets Y axis values
 	 */
 	private void setRangeAxis(double minY, double maxY, int index) {
 		subPlots.get(index).getRangeAxis().setLowerBound(minY);
@@ -1523,26 +1393,22 @@ public class ChartJFrame extends JFrame {
 	/**
 	 * Calculates x Screen coordinates of Mouse click
 	 * 
-	 * @param event
-	 *            ChartMouseEvent
+	 * @param event ChartMouseEvent
 	 * @return x coordinate
 	 */
 	private double getXCoordinates(final ChartMouseEvent event) {
 		final int x = event.getTrigger().getX();
 		final int y = event.getTrigger().getY();
 		final Point2D p = chartPanel.translateScreenToJava2D(new Point(x, y));
-		final Rectangle2D dataArea = chartPanel.getChartRenderingInfo()
-				.getPlotInfo().getSubplotInfo(0).getDataArea();
-		xx = plot.getDomainAxis().java2DToValue(p.getX(), dataArea,
-				plot.getDomainAxisEdge());
+		final Rectangle2D dataArea = chartPanel.getChartRenderingInfo().getPlotInfo().getSubplotInfo(0).getDataArea();
+		xx = plot.getDomainAxis().java2DToValue(p.getX(), dataArea, plot.getDomainAxisEdge());
 		return xx;
 	}
 
 	/**
 	 * Calculates y Screen coordinates of Mouse click
 	 * 
-	 * @param event
-	 *            ChartMouseEvent
+	 * @param event ChartMouseEvent
 	 * @return y coordinate
 	 */
 
@@ -1552,10 +1418,9 @@ public class ChartJFrame extends JFrame {
 		int i;
 		final Point2D p = chartPanel.translateScreenToJava2D(new Point(x, y));
 		for (i = 0; i < subPlots.size(); i++) {
-			final Rectangle2D dataArea = chartPanel.getChartRenderingInfo()
-					.getPlotInfo().getSubplotInfo(i).getDataArea();
-			yy = subPlots.get(i).getRangeAxis().java2DToValue(p.getY(),
-					dataArea, subPlots.get(i).getRangeAxisEdge());
+			final Rectangle2D dataArea = chartPanel.getChartRenderingInfo().getPlotInfo().getSubplotInfo(i)
+					.getDataArea();
+			yy = subPlots.get(i).getRangeAxis().java2DToValue(p.getY(), dataArea, subPlots.get(i).getRangeAxisEdge());
 			// changed from 0 to 1 to fix the bug that always places text on top
 			// plot it it's
 			// using log scale(since it never drops below zero)
@@ -1569,17 +1434,14 @@ public class ChartJFrame extends JFrame {
 
 	/**
 	 * 
-	 * @param x
-	 *            X value (where to draw the line at)
-	 * @param delete
-	 *            boolean: whether the user is deleting or adding a line. True
-	 *            is for delete and false is for add * Draws the lines and text
-	 *            labels on the chart and updates them
+	 * @param x      X value (where to draw the line at)
+	 * @param delete boolean: whether the user is deleting or adding a line. True is
+	 *               for delete and false is for add * Draws the lines and text
+	 *               labels on the chart and updates them
 	 */
 	private void drawLines(double x, boolean delete) {
 
-		double tolerance = (plot.getDomainAxis().getUpperBound() - plot
-				.getDomainAxis().getLowerBound()) * 0.01;
+		double tolerance = (plot.getDomainAxis().getUpperBound() - plot.getDomainAxis().getLowerBound()) * 0.01;
 		// handles deleting a line
 		if (delete) {
 			for (int i = 0; i < depthRange.size(); i++) {
@@ -1591,11 +1453,9 @@ public class ChartJFrame extends JFrame {
 					year.remove(i);
 					for (int k = i; k < depthRange.size(); k++) {
 						if (topYear >= 0) {
-							year.set(k, new Integer(
-									(year.get(k).intValue()) + 1));
+							year.set(k, new Integer((year.get(k).intValue()) + 1));
 						} else {
-							year.set(k, new Integer(
-									(year.get(k).intValue()) - 1));
+							year.set(k, new Integer((year.get(k).intValue()) - 1));
 						}
 					}
 					drawLines(-1, false);
@@ -1610,10 +1470,8 @@ public class ChartJFrame extends JFrame {
 			subPlots.get(i).clearAnnotations();
 			// create text annotations again
 			for (int j = 0; j < year.size(); j++) {
-				XYTextAnnotation text = new XYTextAnnotation(
-						"\t\t\t\t           " + year.get(j), depthRange.get(j)
-								.doubleValue(), subPlots.get(0).getRangeAxis()
-								.getUpperBound());
+				XYTextAnnotation text = new XYTextAnnotation("\t\t\t\t           " + year.get(j),
+						depthRange.get(j).doubleValue(), subPlots.get(0).getRangeAxis().getUpperBound());
 				text.setRotationAngle(1.57);
 				text.setPaint(Color.black);
 
@@ -1625,44 +1483,38 @@ public class ChartJFrame extends JFrame {
 			if (comments != null && commentedPlot != null) {
 				for (int k = 0; k < comments.size(); k++) {
 					XYTextAnnotation comment = comments.get(k);
-					(subPlots.get(commentedPlot.get(k).intValue()))
-							.addAnnotation(comment);
+					(subPlots.get(commentedPlot.get(k).intValue())).addAnnotation(comment);
 				}
 			}
 		}
 		for (int i = 0; i < depthRange.size(); i++) {
 			for (int j = 0; j < subPlots.size(); j++) {
 				// redraw the lines
-				XYLineAnnotation yearLine = new XYLineAnnotation(depthRange
-						.get(i).doubleValue(), subPlots.get(j).getRangeAxis()
-						.getLowerBound(), depthRange.get(i).doubleValue(),
-						subPlots.get(j).getRangeAxis().getUpperBound(),
-						new BasicStroke(), Color.blue);
+				XYLineAnnotation yearLine = new XYLineAnnotation(depthRange.get(i).doubleValue(),
+						subPlots.get(j).getRangeAxis().getLowerBound(), depthRange.get(i).doubleValue(),
+						subPlots.get(j).getRangeAxis().getUpperBound(), new BasicStroke(), Color.blue);
 				subPlots.get(j).addAnnotation(yearLine);
 			}
 		}
 	}
 
 	/**
-	 * @param ignore
-	 *            Component to ignore
-	 * @param disable
-	 *            Boolean (true to disable, false to enable)
+	 * @param ignore  Component to ignore
+	 * @param disable Boolean (true to disable, false to enable)
 	 */
 
 	void disableComponents(JToggleButton ignore, boolean disable) {
 
 		/**
-		 * Added: 07/17/2005 Make sure Import Report button remains disabled if
-		 * user had started adding lines to the chart
+		 * Added: 07/17/2005 Make sure Import Report button remains disabled if user had
+		 * started adding lines to the chart
 		 **/
 		if (year.size() > 0) {
 			importSession.setEnabled(false);
 		}
 	}
 
-	public void run(String args) throws FileNotFoundException,
-			DataFileException, IOException {
+	public void run(String args) throws FileNotFoundException, DataFileException, IOException {
 		plot();
 	}
 
@@ -1676,8 +1528,7 @@ public class ChartJFrame extends JFrame {
 		 */
 		private static final long serialVersionUID = -1025983045326375098L;
 
-		public ImportSessionAction(String text, ImageIcon icon, String desc,
-				Integer mnemonic) {
+		public ImportSessionAction(String text, ImageIcon icon, String desc, Integer mnemonic) {
 			super(text, icon);
 			putValue(SHORT_DESCRIPTION, desc);
 			putValue(MNEMONIC_KEY, mnemonic);
@@ -1688,27 +1539,21 @@ public class ChartJFrame extends JFrame {
 			int returnVal = chooser.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				try {
-					BufferedReader br = new BufferedReader(
-							new java.io.FileReader(chooser.getSelectedFile()));
+					BufferedReader br = new BufferedReader(new java.io.FileReader(chooser.getSelectedFile()));
 					for (int i = 0; i < 6; i++) {
 						br.readLine();
 					}
 					String line = "";
 					while ((line = br.readLine()) != null) {
-						StringTokenizer tokenizer2 = new StringTokenizer(line,
-								",");
-						depthRange.add(new Double(Double.parseDouble(tokenizer2
-								.nextToken().trim())));
-						year.add(new Integer(Integer.parseInt(tokenizer2
-								.nextToken().trim())));
+						StringTokenizer tokenizer2 = new StringTokenizer(line, ",");
+						depthRange.add(new Double(Double.parseDouble(tokenizer2.nextToken().trim())));
+						year.add(new Integer(Integer.parseInt(tokenizer2.nextToken().trim())));
 					}
 					br.close();
 					// draw annotations
 					drawLines(-1, false);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null,
-							"Report can't be imported", "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Report can't be imported", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -1722,8 +1567,7 @@ public class ChartJFrame extends JFrame {
 		 */
 		private static final long serialVersionUID = -6006797352681194187L;
 
-		public ViewReportAction(String text, ImageIcon icon, String desc,
-				Integer mnemonic) {
+		public ViewReportAction(String text, ImageIcon icon, String desc, Integer mnemonic) {
 			super(text, icon);
 			putValue(SHORT_DESCRIPTION, desc);
 			putValue(MNEMONIC_KEY, mnemonic);
@@ -1745,8 +1589,7 @@ public class ChartJFrame extends JFrame {
 
 		File Path;
 
-		public GenerateReportAction(String text, ImageIcon icon, String desc,
-				Integer mnemonic) {
+		public GenerateReportAction(String text, ImageIcon icon, String desc, Integer mnemonic) {
 			super(text, icon);
 			putValue(SHORT_DESCRIPTION, desc);
 			putValue(MNEMONIC_KEY, mnemonic);
@@ -1758,21 +1601,17 @@ public class ChartJFrame extends JFrame {
 				if (!Path.exists()) {
 					Path.mkdirs();
 				}
-				reportFile = new File(Path, correctedFile.getName().substring(
-						0, correctedFile.getName().indexOf("."))
-						+ "Report"
-						+ correctedFile.getName().substring(
-								correctedFile.getName().indexOf("."),
-								correctedFile.getName().length()));
+				reportFile = new File(Path,
+						correctedFile.getName().substring(0, correctedFile.getName().indexOf(".")) + "Report"
+								+ correctedFile.getName().substring(correctedFile.getName().indexOf("."),
+										correctedFile.getName().length()));
 				if (!reportFile.exists()) {
 					reportFile.createNewFile();
 					createReport();
 				} else {
-					int answer = JOptionPane
-							.showConfirmDialog(
-									null,
-									"Report file already exists, do you want to overwrite? ",
-									"Exit", JOptionPane.YES_NO_CANCEL_OPTION);
+					int answer = JOptionPane.showConfirmDialog(null,
+							"Report file already exists, do you want to overwrite? ", "Exit",
+							JOptionPane.YES_NO_CANCEL_OPTION);
 					if (answer == 0) {
 						createReport();
 					} else if (answer == 1) {
@@ -1780,8 +1619,7 @@ public class ChartJFrame extends JFrame {
 						int returnVal = chooser.showSaveDialog(null);
 						if (returnVal == JFileChooser.APPROVE_OPTION) {
 							Path = chooser.getCurrentDirectory();
-							reportFile = new File(Path, chooser
-									.getSelectedFile().getName());
+							reportFile = new File(Path, chooser.getSelectedFile().getName());
 							createReport();
 						}
 					}
@@ -1789,19 +1627,17 @@ public class ChartJFrame extends JFrame {
 			}
 
 			catch (IOException ioe) {
-				JOptionPane.showMessageDialog(null, "IO Exception", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "IO Exception", "Error", JOptionPane.ERROR_MESSAGE);
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "An Error had occurred:\n"
-						+ ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "An Error had occurred:\n" + ex.getMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
 		private void createReport() {
 			try {
-				PrintWriter out = new PrintWriter(new BufferedWriter(
-						new java.io.FileWriter(reportFile)));
+				PrintWriter out = new PrintWriter(new BufferedWriter(new java.io.FileWriter(reportFile)));
 				out.write("" + topYear);
 				out.println();
 				out.write(selectedMethod);
@@ -1825,8 +1661,7 @@ public class ChartJFrame extends JFrame {
 				if (depthRange != null) {
 					out.println();
 					for (int i = 0; i < depthRange.size(); i++) {
-						double depthRangeDouble = depthRange.get(i)
-								.doubleValue();
+						double depthRangeDouble = depthRange.get(i).doubleValue();
 						int yearInteger = year.get(i).intValue();
 						out.write(depthRangeDouble + ", " + yearInteger);
 						out.println();
@@ -1835,19 +1670,14 @@ public class ChartJFrame extends JFrame {
 					out.flush();
 					out.close();
 				}
-				JOptionPane
-						.showMessageDialog(
-								null,
-								"Report generated successfully. Click on view report to display it",
-								"Success", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Report generated successfully. Click on view report to display it",
+						"Success", JOptionPane.PLAIN_MESSAGE);
 
 				viewReport.getAction().setEnabled(true);
 			} catch (IOException ioe) {
-				JOptionPane.showMessageDialog(ChartJFrame.this, "IO Exception",
-						"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(ChartJFrame.this, "IO Exception", "Error", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(ChartJFrame.this,
-						"An Error had occurred:\n" + ex.getMessage(), "Error",
+				JOptionPane.showMessageDialog(ChartJFrame.this, "An Error had occurred:\n" + ex.getMessage(), "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -1857,8 +1687,7 @@ public class ChartJFrame extends JFrame {
 	/**
 	 * Enable and disable the mouse zooming feature of the chart.
 	 * 
-	 * @param zoom
-	 *            Enables zooming if true
+	 * @param zoom Enables zooming if true
 	 */
 	private void setMouseZoom(boolean zoom) {
 		xzoom.setSelected(zoom);
@@ -1885,11 +1714,11 @@ public class ChartJFrame extends JFrame {
 		}
 		// user entered an illegal value
 		catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(null, "Please enter a valid number",
-					"Invalid Number", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please enter a valid number", "Invalid Number",
+					JOptionPane.ERROR_MESSAGE);
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "An Error had occurred:\n"
-					+ ex.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "An Error had occurred:\n" + ex.getMessage(), "Exception",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
