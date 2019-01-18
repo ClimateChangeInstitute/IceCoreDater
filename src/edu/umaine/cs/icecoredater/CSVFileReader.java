@@ -289,22 +289,16 @@ public class CSVFileReader {
 		StringTokenizer st = new StringTokenizer(line, ",");
 		int tokenCount = st.countTokens();
 		int tokenNumber = 0;
-		int i = 0;
 		header = new ArrayList<String>();
 		while (st.hasMoreTokens()) {
 
 			String token = st.nextToken();
 			header.add(token);
 			tokenNumber++;
-			/*
-			 * if (!token.trim().equalsIgnoreCase(headers[i])){ valid = false;
-			 * break; }
-			 */
 			if (tokenNumber < tokenCount)
 				out.write(token + ",");
 			else
 				out.write(token);
-			i++;
 		}
 		out.flush();
 		out.println();
