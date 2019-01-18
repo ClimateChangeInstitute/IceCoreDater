@@ -1702,6 +1702,7 @@ public class ChartJFrame extends JFrame {
 						year.add(new Integer(Integer.parseInt(tokenizer2
 								.nextToken().trim())));
 					}
+					br.close();
 					// draw annotations
 					drawLines(-1, false);
 				} catch (Exception ex) {

@@ -90,13 +90,15 @@ public class CSVFileReader {
 				+ csvFile.getName().substring(csvFile.getName().indexOf("."),
 						csvFile.getName().length()));
 
+		BufferedReader br = null;
+		PrintWriter out = null;
 		try {
 
-			BufferedReader br = new BufferedReader(new FileReader(csvFile));
+			br = new BufferedReader(new FileReader(csvFile));
 
 			if (!tempFile1.exists())
 				tempFile1.createNewFile();
-			PrintWriter out = new PrintWriter(new BufferedWriter(
+			out = new PrintWriter(new BufferedWriter(
 					new FileWriter(tempFile1)));
 
 			double previousTop = -1, previousBottom = Double.MAX_VALUE;
@@ -192,8 +194,6 @@ public class CSVFileReader {
 
 				}
 			}
-			out.close();
-			br.close();
 
 			if (negatives) {
 				message += "\n The following elements contain negative values, "
@@ -260,6 +260,17 @@ public class CSVFileReader {
 				e1.printStackTrace();
 			}
 			return null;
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (out != null)
+				out.close();
+				
 		}
 
 	}
