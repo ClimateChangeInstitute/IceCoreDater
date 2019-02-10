@@ -42,8 +42,7 @@ public class StartMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = 5357731128318727391L;
 
-	JButton aboutButton = new JButton(new ImageIcon(getClass().getResource(
-			IceCoreDating.imageDir + "/about.gif")));
+	JButton aboutButton = new JButton(new AboutAction());
 	JPanel jPanel1 = new JPanel();
 	JLabel newSessionLabel = new JLabel();
 	JLabel continueSessionLabel = new JLabel();
@@ -64,9 +63,9 @@ public class StartMenu extends JFrame {
 
 	private void jbInit() throws Exception {
 		this.getContentPane().setLayout(null);
-		aboutButton.setText("About");
-		aboutButton
-				.addActionListener(new StartMenu_jButton4_actionAdapter(this));
+//		aboutButton.setText("About");
+//		aboutButton
+//				.addActionListener(new StartMenu_jButton4_actionAdapter(this));
 		aboutButton.setBounds(new Rectangle(69, 218, 107, 27));
 		aboutButton.setFont(new java.awt.Font("Arial", 1, 11));
 		aboutButton.setToolTipText("About");
@@ -120,12 +119,6 @@ public class StartMenu extends JFrame {
 		this.requestFocus();
 	}
 
-	void jButton4_actionPerformed(ActionEvent e) {
-		IceCoreDating splash = new IceCoreDating();
-		splash.createSplashScreen(IceCoreDating.imageDir + "/splashScreen.jpg");
-		splash.showSplashScreen();
-	}
-
 	void jButton3_actionPerformed(ActionEvent e) {
 
 	}
@@ -150,19 +143,6 @@ public class StartMenu extends JFrame {
 
 	void jButton5_actionPerformed(ActionEvent e) {
 		System.exit(0);
-	}
-
-	class StartMenu_jButton4_actionAdapter implements
-			java.awt.event.ActionListener {
-		StartMenu adaptee;
-
-		StartMenu_jButton4_actionAdapter(StartMenu adaptee) {
-			this.adaptee = adaptee;
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			adaptee.jButton4_actionPerformed(e);
-		}
 	}
 
 	class StartMenu_jButton3_actionAdapter implements

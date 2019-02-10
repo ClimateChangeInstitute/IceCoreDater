@@ -60,7 +60,7 @@ public class RecordJButton extends JToggleButton {
 		
 		// Never seen by the user.
 		hiddenButton = new JToggleButton();
-		window.getButtonGroup().add(hiddenButton);
+		window.getButtonGroup().add(hiddenButton); // TODO this is an error and just weird
 	}
 
 	public RecordButtonAction getAction() {

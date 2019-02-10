@@ -923,6 +923,7 @@ public class ChartJFrame extends JFrame {
 		menuBar = new JMenuBar();
 		JMenu chartMenu = new JMenu("Chart");
 		JMenu FileMenu = new JMenu("File");
+		JMenu helpMenu = new JMenu("Help");
 		// chartMenu.add(new JMenuItem(recordButton.getAction()));
 		chartMenu.add(new JMenuItem(generateReport.getAction()));
 		chartMenu.add(new JMenuItem(viewReport.getAction()));
@@ -939,8 +940,12 @@ public class ChartJFrame extends JFrame {
 				System.exit(0);
 			}
 		}));
+		
+		helpMenu.add(new AboutAction());
+		
 		menuBar.add(FileMenu);
 		menuBar.add(chartMenu);
+		menuBar.add(helpMenu);
 		this.setJMenuBar(menuBar);
 		minY = subPlots.get(index).getRangeAxis().getLowerBound();
 		maxY = subPlots.get(index).getRangeAxis().getUpperBound();
