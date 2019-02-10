@@ -288,7 +288,6 @@ public class ChartJFrame extends JFrame {
 	 * @throws FileNotFoundException
 	 */
 	public ChartJFrame() throws FileNotFoundException, DataFileException, IOException {
-		buttonGroup = new ButtonGroup();
 		init();
 	}
 
@@ -308,7 +307,6 @@ public class ChartJFrame extends JFrame {
 	@SuppressWarnings("unchecked")
 	public ChartJFrame(File correctedFile, int topYear, int numOfElements, List<Checkbox> selectedElements,
 			String selectedMethod) throws FileNotFoundException, DataFileException, IOException {
-		buttonGroup = new ButtonGroup();
 		this.correctedFile = correctedFile;
 
 		this.topYear = topYear;
@@ -1520,6 +1518,7 @@ public class ChartJFrame extends JFrame {
 	}
 
 	public void init() throws FileNotFoundException, DataFileException, IOException {
+		buttonGroup = new ButtonGroup();
 		plot();
 	}
 
