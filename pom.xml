@@ -17,7 +17,15 @@
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
+					<exclude>**/*.properties</exclude>
 				</excludes>
+			</resource>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<plugins>
