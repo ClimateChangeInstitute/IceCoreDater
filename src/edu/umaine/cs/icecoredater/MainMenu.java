@@ -117,7 +117,7 @@ public class MainMenu extends JFrame {
 		if (tempFile != null) {
 			this.correctedFile = tempFile;
 		}
-		run("");
+		init();
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class MainMenu extends JFrame {
 
 	}
 
-	public void run(String arg) {
+	public void init() {
 		try {
 
 			this.setResizable(false);

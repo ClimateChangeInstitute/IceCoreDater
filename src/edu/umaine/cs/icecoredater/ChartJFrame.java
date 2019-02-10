@@ -289,7 +289,7 @@ public class ChartJFrame extends JFrame {
 	 */
 	public ChartJFrame() throws FileNotFoundException, DataFileException, IOException {
 		buttonGroup = new ButtonGroup();
-		run("");
+		init();
 	}
 
 	/**
@@ -329,7 +329,7 @@ public class ChartJFrame extends JFrame {
 
 		this.selectedMethod = selectedMethod;
 
-		run("");
+		init();
 	}
 
 	/**
@@ -346,7 +346,7 @@ public class ChartJFrame extends JFrame {
 
 		this.correctedFile = tempFile;
 		this.reportFile = reportFile;
-		run("");
+		init();
 	}
 
 	/**
@@ -1519,7 +1519,7 @@ public class ChartJFrame extends JFrame {
 		}
 	}
 
-	public void run(String args) throws FileNotFoundException, DataFileException, IOException {
+	public void init() throws FileNotFoundException, DataFileException, IOException {
 		plot();
 	}
 

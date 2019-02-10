@@ -119,11 +119,8 @@ public class StartMenu extends JFrame {
 		this.requestFocus();
 	}
 
-	void jButton3_actionPerformed(ActionEvent e) {
 
-	}
-
-	void startNewSessionActionPerformed(ActionEvent e)
+	void startNewSessionActionPerformed()
 			throws FileNotFoundException, DataFileException, IOException {
 
 		dispose();
@@ -133,7 +130,7 @@ public class StartMenu extends JFrame {
 
 	}
 
-	void jButton2_actionPerformed(ActionEvent e) throws FileNotFoundException,
+	void continueSessionActionPerformed() throws FileNotFoundException,
 			DataFileException, IOException {
 		dispose();
 		FileOpener opener = new FileOpener();
@@ -141,21 +138,8 @@ public class StartMenu extends JFrame {
 		opener.open();
 	}
 
-	void jButton5_actionPerformed(ActionEvent e) {
+	void exit() {
 		System.exit(0);
-	}
-
-	class StartMenu_jButton3_actionAdapter implements
-			java.awt.event.ActionListener {
-		StartMenu adaptee;
-
-		StartMenu_jButton3_actionAdapter(StartMenu adaptee) {
-			this.adaptee = adaptee;
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			adaptee.jButton3_actionPerformed(e);
-		}
 	}
 
 	class NewSessionAction implements ActionListener {
@@ -167,7 +151,7 @@ public class StartMenu extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			try {
-				adaptee.startNewSessionActionPerformed(e);
+				adaptee.startNewSessionActionPerformed();
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(StartMenu.this,
 						"Unable to open file.", "File Error",
@@ -195,7 +179,7 @@ public class StartMenu extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			try {
-				adaptee.jButton2_actionPerformed(e);
+				adaptee.continueSessionActionPerformed();
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(StartMenu.this,
 						"Unable to open file.", "File Error",
@@ -222,7 +206,7 @@ public class StartMenu extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			adaptee.jButton5_actionPerformed(e);
+			adaptee.exit();
 		}
 	}
 
