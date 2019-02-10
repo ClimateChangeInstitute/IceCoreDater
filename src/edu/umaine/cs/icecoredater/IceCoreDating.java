@@ -26,12 +26,22 @@ package edu.umaine.cs.icecoredater;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Frame;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,7 +63,7 @@ public class IceCoreDating extends Frame {
 	public static final String imageDir = "images";
 
 	final int splashTime = 5000;
-	
+
 	private JWindow splashScreen;
 
 	private JLabel splashLabel;
@@ -70,7 +80,15 @@ public class IceCoreDating extends Frame {
 	}
 
 	public void createSplashScreen(String path) {
-		ImageIcon img = new ImageIcon(getClass().getResource(path));
+
+		ImageIcon img;
+		try {
+			img = new ImageIcon(SplashScreen.getSplashScreenImage(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return; // Just give up for now
+		}
+
 		splashLabel = new JLabel(img);
 		splashScreen = new JWindow(this);
 		splashScreen.getContentPane().add(splashLabel, BorderLayout.CENTER);
@@ -104,8 +122,9 @@ public class IceCoreDating extends Frame {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Unknown Error "
-					+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"Unknown Error " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 		createSplashScreen(imageDir + "/splashScreen.jpg");
@@ -127,7 +146,7 @@ public class IceCoreDating extends Frame {
 				} else {
 					count += inc;
 				}
-				
+
 				Thread.sleep(inc);
 			}
 
