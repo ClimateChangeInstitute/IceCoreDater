@@ -12,6 +12,8 @@ import java.util.Properties;
 import javax.imageio.ImageIO;
 
 public class SplashScreen {
+	
+	final public static String SPLASH_IMAGE = "/splashScreen.png"; 
 
 	public static BufferedImage getSplashScreenImage(final String path)
 			throws IOException {

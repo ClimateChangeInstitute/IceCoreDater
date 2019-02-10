@@ -31,6 +31,7 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -70,14 +71,16 @@ public class IceCoreDating extends Frame {
 		icd.run();
 	}
 
-	public void createSplashScreen(String path) {
+	public void createSplashScreen() {
 
 		ImageIcon img;
 		try {
-			img = new ImageIcon(SplashScreen.getSplashScreenImage(path));
+			img = new ImageIcon(SplashScreen.getSplashScreenImage(
+					imageDir + SplashScreen.SPLASH_IMAGE));
 		} catch (IOException e) {
 			e.printStackTrace();
-			return; // Just give up for now
+			img = new ImageIcon(
+					new BufferedImage(614, 445, BufferedImage.TYPE_INT_ARGB));
 		}
 
 		splashLabel = new JLabel(img);
@@ -118,7 +121,7 @@ public class IceCoreDating extends Frame {
 					JOptionPane.ERROR_MESSAGE);
 		}
 
-		createSplashScreen(imageDir + "/splashScreen.jpg");
+		createSplashScreen();
 		try {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {

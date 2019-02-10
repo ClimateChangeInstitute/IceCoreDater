@@ -35,7 +35,7 @@ public class AboutAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		IceCoreDating splash = new IceCoreDating();
-		splash.createSplashScreen(IceCoreDating.imageDir + "/splashScreen.png");
+		splash.createSplashScreen();
 		splash.showSplashScreen();
 	}
 
