@@ -34,7 +34,7 @@ Fall Meet. Suppl. View PDF
 
 
 The latest version of the ice core dating software is **1.2.0**.  You
-may download an executable jar from the releases page.
+may download an executable jar from the releases page http://cci.icecoredata.org/software/download.html.
 
 If you are a developer, you may find the following section to be helpful.
 
