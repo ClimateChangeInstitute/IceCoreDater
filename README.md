@@ -4,7 +4,7 @@ Credits
 
 Programming:
 
-Bashar S. Abdul and Mark Royer
+Mark Royer and Bashar S. Abdul
 
 Development and Production:
 
@@ -32,10 +32,6 @@ Dating Software for Interactive Dating of Ice Cores, EOS,
 TRANSACTIONS, American Geophysical Union, 86(52), Abstract PP33C-1603,
 Fall Meet. Suppl. View PDF
 
-View PDF of AGU Fall 2005 Poster ( 896 K)
-
-Please report any bugs, feedback, questions or technical problems to
-Andrei Kurbatov
 
 The latest version of the ice core dating software is **1.2.0**.  You
 may download an executable jar from the releases page.
@@ -87,9 +83,9 @@ splash screen.  In addition, the [pom.xml](./pom.xml) configuration
 uses the version to generate the final executable jar file.
 
 
-<!--  LocalWords:  IceCoreDater Bashar Royer Kurbatov Kaspari JFree
+<!--  LocalWords:  IceCoreDater Royer Kurbatov Kaspari JFree
  -->
-<!--  LocalWords:  JFreeChart Mayewski Jawad EOS AGU mvn icecoredater
+<!--  LocalWords:  JFreeChart Mayewski EOS AGU mvn icecoredater
  -->
 <!--  LocalWords:  xml icecoredating
  -->
